@@ -1,3 +1,4 @@
+<section id="hero" style={ ... }>
 export default function Hero() {
   return (
     <section
