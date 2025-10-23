@@ -1,8 +1,14 @@
 import { useState } from 'react';
-import Link from 'next/link';
 
 export default function Navbar() {
   const [hover, setHover] = useState(false);
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <nav
@@ -19,23 +25,25 @@ export default function Navbar() {
         backgroundImage: hover
           ? 'linear-gradient(90deg, rgba(200,169,81,0.1), rgba(234,210,127,0.15))'
           : 'none',
-        transition: 'background-image 1s ease'
+        transition: 'background-image 1s ease',
+        position: 'fixed',
+        width: '100%',
+        top: 0,
+        zIndex: 1000
       }}
     >
       {/* Logo */}
       <div style={{ color: '#EAD27F', fontWeight: 'bold', fontSize: '1.3rem' }}>
-        <Link href="/" style={{ textDecoration: 'none', color: '#EAD27F' }}>
-          G & G Property Tours
-        </Link>
+        G & G Property Tours
       </div>
 
       {/* Navigation Links */}
       <div style={{ display: 'flex', gap: '1.5rem' }}>
-        <Link href="/" style={linkStyle}>Home</Link>
-        <Link href="/plans" style={linkStyle}>Plans</Link>
-        <Link href="/subscriber-signup" style={linkStyle}>Join</Link>
-        <Link href="/tenant-signup" style={linkStyle}>For Tenants</Link>
-        <Link href="/testimonials" style={linkStyle}>Testimonials</Link>
+        <a onClick={() => scrollToSection('hero')} style={linkStyle}>Home</a>
+        <a onClick={() => scrollToSection('howitworks')} style={linkStyle}>How It Works</a>
+        <a onClick={() => scrollToSection('plans')} style={linkStyle}>Plans</a>
+        <a href="/subscriber-signup" style={linkStyle}>Join</a>
+        <a href="/tenant-signup" style={linkStyle}>For Tenants</a>
       </div>
     </nav>
   );
@@ -46,4 +54,5 @@ const linkStyle = {
   textDecoration: 'none',
   fontWeight: '500',
   transition: 'color 0.3s ease',
+  cursor: 'pointer'
 };
