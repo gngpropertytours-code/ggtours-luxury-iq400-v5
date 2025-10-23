@@ -84,24 +84,8 @@ export default function Plans() {
             onMouseOver={(e) => (e.currentTarget.style.transform = "scale(1.03)")}
             onMouseOut={(e) => (e.currentTarget.style.transform = "scale(1)")}
           >
-            <h3
-              style={{
-                color: "#EAD27F",
-                fontWeight: "600",
-                fontSize: "1.5rem",
-              }}
-            >
-              {plan.name}
-            </h3>
-            <p
-              style={{
-                color: "white",
-                margin: "15px 0",
-                fontSize: "1.1rem",
-              }}
-            >
-              {plan.price}
-            </p>
+            <h3 style={{ color: "#EAD27F" }}>{plan.name}</h3>
+            <p style={{ color: "white" }}>{plan.price}</p>
             <ul
               style={{
                 listStyle: "none",
