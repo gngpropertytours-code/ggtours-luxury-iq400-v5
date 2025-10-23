@@ -1,3 +1,5 @@
+import MetricsSection from "../components/MetricsSection";
+import DualRoleCallout from "../components/DualRoleCallout";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Plans from "../components/Plans";
@@ -11,6 +13,8 @@ export default function Home() {
     <>
       <Navbar />
       <Hero />
+      <MetricsSection />
+      <DualRoleCallout />
       <HowItWorks />
       <Plans />
       <Footer />
