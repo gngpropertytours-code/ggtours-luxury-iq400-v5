@@ -1,14 +1,14 @@
+/* Base */
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
 body {
-  margin: 0;
-  background-color: #000;
+  background: #000;
   color: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
-button:hover, a:hover {
-  color: #EAD27F;
-  transition: color 0.3s ease;
-}
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 80px;
-}
+
+/* Smooth scrolling + space for fixed navbar */
+html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+/* Links/buttons subtle motion */
+a, button { transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease; }
