@@ -1,2 +1,2 @@
-G & G Property Tours – IQ-400 Luxury Build v5
-Deployment: https://vercel.com/new → Import Git Repository → Deploy (Next.js)
+G & G Property Tours — IQ-400 Luxury Build v5 (Silver Edition)
+Deploy: vercel.com/new → Import Git Repo → Framework: Next.js → Deploy
