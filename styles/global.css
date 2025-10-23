@@ -1,14 +1,103 @@
-/* Base */
-* { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
-body {
-  background: #000;
+/* G & G Property Tours — IQ-400 Luxury v5 (Silver Edition) */
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+/* Base Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  background-color: #000;
   color: #fff;
-  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
-/* Smooth scrolling + space for fixed navbar */
-html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+/* Typography System */
+h1, h2, h3 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+}
 
-/* Links/buttons subtle motion */
-a, button { transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease; }
+p, li, a, button, input, textarea {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Silver Gradient Utility */
+.text-silver {
+  background: linear-gradient(90deg, #DCDCDC, #C0C0C0, #A9A9A9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Smooth Motion Base */
+.fade-in {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: fadeUp 1s ease forwards;
+}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Link / Button Hover */
+a, button {
+  transition: all 0.3s ease;
+}
+
+/* Button Presets */
+.btn-silver {
+  background: linear-gradient(90deg, #C0C0C0, #E0E0E0, #A8A8A8);
+  color: #000;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-silver:hover {
+  opacity: 0.85;
+}
+
+.btn-outline {
+  border: 1px solid #C0C0C0;
+  background: transparent;
+  color: #C0C0C0;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+}
+.btn-outline:hover {
+  background: #C0C0C0;
+  color: #000;
+}
+
+/* Section Layout */
+section {
+  width: 100%;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+/* Card Shadow / Depth */
+.card {
+  background-color: #121212;
+  border: 1px solid rgba(192,192,192,0.3);
+  border-radius: 10px;
+  padding: 30px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  border-color: #C0C0C0;
+}
+
+/* Scrollbar refinement (for desktop) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2F2F2F;
+  border-radius: 4px;
+}
