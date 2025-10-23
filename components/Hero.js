@@ -3,15 +3,21 @@ import React from "react";
 export default function Hero() {
   return (
     <section
-      style={{
-        background: "linear-gradient(180deg, #000 0%, #0A0A0A 100%)",
-        color: "#E0E0E0",
-        padding: "160px 20px 140px",
-        textAlign: "center",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
+  style={{
+    background: "linear-gradient(180deg, #000 0%, #0A0A0A 100%)",
+    color: "#E0E0E0",
+    minHeight: "100vh", // takes full visible height of any device
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    textAlign: "center",
+    padding: "clamp(100px, 20vh, 160px) 20px",
+    boxSizing: "border-box",
+    position: "relative",
+    overflow: "hidden",
+  }}
+>
       {/* Cinematic Background Video */}
       <video
         autoPlay
