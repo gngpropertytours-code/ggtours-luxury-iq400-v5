@@ -1,46 +1,52 @@
+import { useEffect, useRef } from "react";
+
 export default function HowItWorks() {
+  const cardsRef = useRef([]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add("fade-in");
+        });
+      },
+      { threshold: 0.2 }
+    );
+
+    cardsRef.current.forEach(card => observer.observe(card));
+    return () => observer.disconnect();
+  }, []);
+
   const steps = [
     {
-      title: "1. Browse Verified Listings",
-      desc: "Explore hand-picked, fully verified rental listings curated for the Baltimore and Maryland area — all presented with cinematic detail.",
+      title: "1 · Browse Verified Listings",
+      desc: "Tenants explore our publicly verified properties curated for the Maryland market — each listing reviewed for accuracy and presentation.",
     },
     {
-      title: "2. Apply Securely Online",
-      desc: "Upload your paystubs, references, and background info within minutes. Our HAVEN AI intelligently scores applications for landlords.",
+      title: "2 · Apply with Confidence",
+      desc: "HAVEN AI reviews uploaded paystubs, credit info, and references to ensure landlords receive trusted, qualified applicants instantly.",
     },
     {
-      title: "3. Schedule a Tour",
-      desc: "SYNCRO AI coordinates your virtual or in-person tour, confirming times with both tenant and landlord automatically.",
+      title: "3 · Schedule Your Tour",
+      desc: "SYNCRO AI coordinates times between tenant and landlord, sending confirmations and reminders seamlessly.",
     },
   ];
 
   return (
-    <section id="how-it-works">
-      <h2
-        className="text-silver fade-in"
-        style={{
-          fontSize: "2.4rem",
-          marginBottom: "20px",
-          textAlign: "center",
-        }}
-      >
+    <section id="how-it-works" style={{ padding: "120px 20px", textAlign: "center" }}>
+      <h2 className="text-silver" style={{ fontSize: "2.5rem", marginBottom: "20px" }}>
         How It Works
       </h2>
-
       <p
-        className="fade-in"
         style={{
           color: "#BFBFBF",
-          maxWidth: "700px",
-          margin: "0 auto 50px",
+          maxWidth: "720px",
+          margin: "0 auto 60px",
           fontSize: "1.1rem",
           lineHeight: "1.6",
-          textAlign: "center",
         }}
       >
-        Whether you’re searching for your next home or managing multiple
-        properties, G & G Property Tours streamlines your journey with
-        simplicity, precision, and automation.
+        Simplicity · Automation · Trust — the foundation of G & G Property Tours.
       </p>
 
       <div
@@ -48,25 +54,26 @@ export default function HowItWorks() {
           display: "flex",
           flexWrap: "wrap",
           justifyContent: "center",
-          gap: "20px",
+          gap: "24px",
         }}
       >
-        {steps.map((step, index) => (
+        {steps.map((step, i) => (
           <div
-            key={index}
-            className="card fade-in"
+            key={i}
+            ref={el => (cardsRef.current[i] = el)}
+            className="card"
             style={{
               width: "320px",
-              background: "rgba(20, 20, 20, 0.8)",
-              backdropFilter: "blur(4px)",
+              background: "rgba(18,18,18,0.8)",
+              backdropFilter: "blur(6px)",
               cursor: "default",
             }}
           >
             <h3
               style={{
                 color: "#C0C0C0",
+                fontSize: "1.3rem",
                 marginBottom: "10px",
-                fontSize: "1.4rem",
               }}
             >
               {step.title}
