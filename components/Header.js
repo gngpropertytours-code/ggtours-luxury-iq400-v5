@@ -3,16 +3,16 @@ import Logo from "./Logo";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 768);
-    handleResize();
+    const handleResize = () => {
+      if (window.innerWidth > 768) setMenuOpen(false);
+    };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const navLinks = [
+  const links = [
     { name: "Home", href: "#" },
     { name: "Properties", href: "#listings" },
     { name: "Plans", href: "#plans" },
@@ -21,131 +21,136 @@ export default function Header() {
   ];
 
   return (
-<header
-  style={{
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    padding: "1rem clamp(1rem, 5vw, 2.5rem)", // <-- this auto-adjusts
-    backgroundColor: "rgba(0, 0, 0, 0.9)",
-    backdropFilter: "blur(6px)",
-    borderBottom: "1px solid rgba(192,192,192,0.2)",
-    position: "fixed",
-    top: 0,
-    left: 0,
-    right: 0,           // ensures full width, not oversized
-    width: "100%",
-    boxSizing: "border-box",
-    zIndex: 999,
-  }}
->
-      <Logo />
+    <header
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 9999,
+        background: "rgba(0,0,0,0.9)",
+        backdropFilter: "blur(8px)",
+        borderBottom: "1px solid rgba(192,192,192,0.25)",
+        padding: "1rem clamp(1rem, 4vw, 2.5rem)",
+        boxSizing: "border-box",
+        width: "100%",
+        overflow: "hidden",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          maxWidth: "1200px",
+          margin: "0 auto",
+        }}
+      >
+        <Logo />
 
-      {/* --- Hamburger icon --- */}
-      {isMobile ? (
+        {/* Burger Icon */}
         <div
           onClick={() => setMenuOpen(!menuOpen)}
           style={{
             cursor: "pointer",
             display: "flex",
             flexDirection: "column",
-            gap: "5px",
-          }}
-        >
-          <span
-            style={{
-              width: "25px",
-              height: "2px",
-              background: "#f5f5f5",
-              transition: "0.3s",
-              transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none",
-            }}
-          ></span>
-          <span
-            style={{
-              width: "25px",
-              height: "2px",
-              background: "#f5f5f5",
-              opacity: menuOpen ? 0 : 1,
-              transition: "0.3s",
-            }}
-          ></span>
-          <span
-            style={{
-              width: "25px",
-              height: "2px",
-              background: "#f5f5f5",
-              transition: "0.3s",
-              transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none",
-            }}
-          ></span>
-        </div>
-      ) : (
-        <nav style={{ display: "flex", gap: "2rem" }}>
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              style={{
-                color: "#f5f5f5",
-                textDecoration: "none",
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: "500",
-                fontSize: "0.95rem",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                position: "relative",
-                transition: "color 0.3s ease",
-              }}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#C0C0C0")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#f5f5f5")}
-            >
-              {link.name}
-            </a>
-          ))}
-        </nav>
-      )}
-
-      {/* --- Mobile Slide Menu --- */}
-      {menuOpen && (
-        <div
-          style={{
-            position: "fixed",
-            top: "70px",
-            right: 0,
-            width: "70%",
-            height: "calc(100vh - 70px)",
-            background: "rgba(0,0,0,0.95)",
-            backdropFilter: "blur(10px)",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
             justifyContent: "center",
-            gap: "2rem",
-            borderLeft: "1px solid rgba(192,192,192,0.2)",
-            transition: "all 0.4s ease",
-            zIndex: 998,
+            gap: "5px",
+            width: "30px",
+            height: "24px",
           }}
         >
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              style={{
-                color: "#f5f5f5",
-                textDecoration: "none",
-                fontFamily: "'Montserrat', sans-serif",
-                fontSize: "1.2rem",
-                letterSpacing: "0.1em",
-                textTransform: "uppercase",
-              }}
-            >
-              {link.name}
-            </a>
-          ))}
+          <span
+            style={{
+              width: "100%",
+              height: "2px",
+              backgroundColor: "#C0C0C0",
+              transition: "all 0.3s ease",
+              transform: menuOpen ? "rotate(45deg) translateY(8px)" : "none",
+            }}
+          />
+          <span
+            style={{
+              width: "100%",
+              height: "2px",
+              backgroundColor: "#C0C0C0",
+              opacity: menuOpen ? 0 : 1,
+              transition: "opacity 0.3s ease",
+            }}
+          />
+          <span
+            style={{
+              width: "100%",
+              height: "2px",
+              backgroundColor: "#C0C0C0",
+              transition: "all 0.3s ease",
+              transform: menuOpen ? "rotate(-45deg) translateY(-8px)" : "none",
+            }}
+          />
         </div>
-      )}
+      </div>
+
+      {/* Dropdown Menu */}
+      <nav
+        style={{
+          maxHeight: menuOpen ? "260px" : "0px",
+          overflow: "hidden",
+          transition: "max-height 0.5s ease-in-out",
+          background: "linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(60,60,60,0.6) 100%)",
+          borderTop: menuOpen ? "1px solid rgba(192,192,192,0.2)" : "none",
+          boxShadow: menuOpen
+            ? "0 4px 30px rgba(255,255,255,0.05)"
+            : "none",
+          animation: menuOpen
+            ? "shimmer 2s linear infinite"
+            : "none",
+        }}
+      >
+        <ul
+          style={{
+            listStyle: "none",
+            margin: 0,
+            padding: menuOpen ? "1rem 0" : 0,
+            textAlign: "center",
+          }}
+        >
+          {links.map((link) => (
+            <li key={link.name} style={{ margin: "1rem 0" }}>
+              <a
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                style={{
+                  color: "#E5E5E5",
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontWeight: "500",
+                  fontSize: "1rem",
+                  textDecoration: "none",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  transition: "color 0.3s ease",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#D8D8D8")}
+                onMouseLeave={(e) => (e.currentTarget.style.color = "#E5E5E5")}
+              >
+                {link.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      {/* Add shimmer animation */}
+      <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            background-position: -1000px 0;
+          }
+          100% {
+            background-position: 1000px 0;
+          }
+        }
+      `}</style>
     </header>
   );
 }
