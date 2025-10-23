@@ -1,21 +1,9 @@
 export default function HowItWorks() {
   const steps = [
-    {
-      title: "1. Explore",
-      desc: "Browse verified listings across Baltimore and Maryland in one sleek interface.",
-    },
-    {
-      title: "2. Apply",
-      desc: "Submit applications securely with paystubs, credit info, or references.",
-    },
-    {
-      title: "3. Schedule",
-      desc: "Book tours instantly with SYNCRO AI handling confirmations and reminders.",
-    },
-    {
-      title: "4. Lease",
-      desc: "Landlords approve verified tenants and finalize via e-sign integration.",
-    },
+    { title: "1. Explore", desc: "Browse verified listings..." },
+    { title: "2. Apply", desc: "Submit applications securely..." },
+    { title: "3. Schedule", desc: "Book tours instantly with SYNCRO AI..." },
+    { title: "4. Lease", desc: "Landlords approve verified tenants..." },
   ];
 
   return (
@@ -60,18 +48,10 @@ export default function HowItWorks() {
               backgroundColor: "#0d0d0d",
             }}
           >
-            <h3
-              style={{
-                color: "#EAD27F",
-                marginBottom: "10px",
-                fontWeight: "600",
-              }}
-            >
+            <h3 style={{ color: "#EAD27F", marginBottom: "10px" }}>
               {step.title}
             </h3>
-            <p style={{ color: "#d4d4d4", lineHeight: "1.6" }}>
-              {step.desc}
-            </p>
+            <p style={{ color: "#d4d4d4" }}>{step.desc}</p>
           </div>
         ))}
       </div>
