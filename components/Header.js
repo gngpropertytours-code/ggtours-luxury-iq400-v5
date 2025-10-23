@@ -21,21 +21,24 @@ export default function Header() {
   ];
 
   return (
-    <header
-      style={{
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: "1rem 1.8rem",
-        backgroundColor: "rgba(0, 0, 0, 0.9)",
-        backdropFilter: "blur(6px)",
-        borderBottom: "1px solid rgba(192,192,192,0.2)",
-        position: "fixed",
-        top: 0,
-        width: "100%",
-        zIndex: 999,
-      }}
-    >
+<header
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "1rem clamp(1rem, 5vw, 2.5rem)", // <-- this auto-adjusts
+    backgroundColor: "rgba(0, 0, 0, 0.9)",
+    backdropFilter: "blur(6px)",
+    borderBottom: "1px solid rgba(192,192,192,0.2)",
+    position: "fixed",
+    top: 0,
+    left: 0,
+    right: 0,           // ensures full width, not oversized
+    width: "100%",
+    boxSizing: "border-box",
+    zIndex: 999,
+  }}
+>
       <Logo />
 
       {/* --- Hamburger icon --- */}
