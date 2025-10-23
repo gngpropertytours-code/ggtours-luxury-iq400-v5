@@ -1,36 +1,68 @@
-import { useState } from 'react';
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
-  const [hover, setHover] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const scrollToSection = (id) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <nav
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
       style={{
-        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
-        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
-        padding: '14px 24px', background: '#000',
-        borderBottom: '2px solid', borderImage: 'linear-gradient(90deg, #8F8F8F, #C0C0C0, #9E9E9E) 1',
-        backgroundImage: hover ? 'linear-gradient(90deg, rgba(160,160,160,0.12), rgba(224,224,224,0.12))' : 'none',
-        transition: 'background-image 0.8s ease'
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        padding: "18px 30px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        zIndex: 100,
+        background: scrolled
+          ? "rgba(0,0,0,0.9)"
+          : "linear-gradient(90deg, rgba(0,0,0,0.6), rgba(0,0,0,0))",
+        backdropFilter: "blur(6px)",
+        borderBottom: scrolled ? "1px solid rgba(192,192,192,0.2)" : "none",
+        transition: "background 0.4s ease, border 0.4s ease",
       }}
     >
-      <div style={{ fontWeight: 700, color: '#C0C0C0' }}>G & G Property Tours</div>
-      <div style={{ display: 'flex', gap: '1.2rem' }}>
-        <a style={link} onClick={() => scrollToSection('hero')}>Home</a>
-        <a style={link} onClick={() => scrollToSection('howitworks')}>How It Works</a>
-        <a style={link} onClick={() => scrollToSection('plans')}>Plans</a>
-        <a style={link} href="/subscriber-signup">Join</a>
-        <a style={link} href="/tenant-signup">For Tenants</a>
-        <a style={link} href="/testimonials">Testimonials</a>
+      <h3
+        style={{
+          fontFamily: "Playfair Display, serif",
+          fontSize: "1.3rem",
+          background: "linear-gradient(90deg,#DCDCDC,#C0C0C0,#A9A9A9)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+        }}
+      >
+        G & G Property Tours
+      </h3>
+
+      <div style={{ display: "flex", gap: "24px" }}>
+        <a href="#hero" style={linkStyle}>
+          Home
+        </a>
+        <a href="#plans" style={linkStyle}>
+          Plans
+        </a>
+        <a href="/subscriber-signup" style={linkStyle}>
+          Sign Up
+        </a>
+        <a href="/tenant-signup" style={linkStyle}>
+          Browse
+        </a>
       </div>
     </nav>
   );
 }
-const link = { color: '#fff', textDecoration: 'none', cursor: 'pointer' };
+
+const linkStyle = {
+  color: "#C0C0C0",
+  textDecoration: "none",
+  fontSize: "0.95rem",
+  fontWeight: 500,
+  transition: "color 0.3s ease",
+};
