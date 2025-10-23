@@ -1,7 +1,7 @@
+import Plans from "../components/Plans";
 import FadeInSection from '../components/FadeInSection';
 import Hero from '../components/Hero';
 import HowItWorks from '../components/HowItWorks';
-import Plans from '../components/Plans';
 
 export default function Home() {
   return (
