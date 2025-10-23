@@ -1,3 +1,4 @@
+<section id="howitworks" style={ ... }>
 export default function HowItWorks() {
   const steps = [
     {
