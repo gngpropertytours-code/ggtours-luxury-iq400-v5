@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  background-color: #000;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+}
+button:hover, a:hover {
+  color: #EAD27F;
+  transition: color 0.3s ease;
+}
