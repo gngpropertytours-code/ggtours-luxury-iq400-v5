@@ -1,54 +1,33 @@
 export default function Plans() {
   const plans = [
-    { name: "Premium", price: "$2,000/mo", perks: "2 listings, IG feature" },
-    { name: "Elite", price: "$4,000/mo", perks: "4 listings, analytics, cinematic tour" },
-    { name: "Enterprise", price: "$8,000/mo", perks: "8 listings, AI automation, team access" },
+    { name: 'Premium', price: '$2,000 / month', features: ['2 listings', 'Photo/video walkthrough', 'Instagram feature'] },
+    { name: 'Elite', price: '$4,000 / month', features: ['4 listings', 'Cinematic walkthroughs', 'Analytics dashboard', 'Priority support'] },
+    { name: 'Enterprise', price: '$8,000 / month', features: ['8 listings', 'AI automation', 'Team access', 'Advanced analytics'] }
   ];
 
   return (
-    <section
-      id="plans"
-      style={{
-        backgroundColor: "black",
-        color: "white",
-        padding: "100px 20px",
-        textAlign: "center",
-      }}
-    >
-      <h2
-        style={{
-          fontSize: "2rem",
-          fontWeight: "700",
-          background: "linear-gradient(90deg, #C8A951, #D4AF37, #EAD27F)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          marginBottom: "50px",
-        }}
-      >
+    <section id="plans" style={{ background: '#000', color: '#fff', padding: '100px 20px', textAlign: 'center' }}>
+      <h2 style={{
+        fontSize: '2rem', marginBottom: 14,
+        background: 'linear-gradient(90deg, #D3D3D3, #C0C0C0, #A9A9A9)',
+        WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
+      }}>
         Subscription Plans
       </h2>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "30px",
-        }}
-      >
-        {plans.map((plan, index) => (
-          <div
-            key={index}
-            style={{
-              border: "1px solid rgba(212,175,55,0.3)",
-              borderRadius: "6px",
-              padding: "30px",
-              minWidth: "250px",
-              backgroundColor: "#0d0d0d",
-            }}
-          >
-            <h3 style={{ color: "#EAD27F" }}>{plan.name}</h3>
-            <p>{plan.price}</p>
-            <p style={{ color: "#d4d4d4" }}>{plan.perks}</p>
+      <p style={{ color: '#BFBFBF', marginBottom: 30 }}>
+        60% cinematic content • 20% targeted ads • 20% AI & product innovation
+      </p>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px,1fr))', gap: 22, maxWidth: 1100, margin: '0 auto' }}>
+        {plans.map((p) => (
+          <div key={p.name} style={{
+            background: '#121212', border: '1px solid rgba(192,192,192,0.25)',
+            borderRadius: 10, padding: '28px 22px'
+          }}>
+            <h3 style={{ color: '#C0C0C0', margin: '0 0 6px' }}>{p.name}</h3>
+            <p style={{ margin: '0 0 16px' }}>{p.price}</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: 0, color: '#BFBFBF', textAlign: 'left' }}>
+              {p.features.map((f) => (<li key={f}>• {f}</li>))}
+            </ul>
           </div>
         ))}
       </div>
