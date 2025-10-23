@@ -3,41 +3,109 @@ export default function Hero() {
     <section
       id="hero"
       style={{
-        backgroundImage: "url('/images/hero-static.jpg')",
-        backgroundSize: 'cover', backgroundPosition: 'center',
-        position: 'relative', minHeight: '88vh',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        textAlign: 'center', padding: '120px 20px', color: '#fff'
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        overflow: "hidden",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#fff",
+        textAlign: "center",
       }}
     >
-      <div style={{
-        position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.6)'
-      }} />
-      <div style={{ position: 'relative', zIndex: 1, maxWidth: 800 }}>
-        <h1 style={{
-          fontSize: '3rem', margin: '0 0 16px',
-          background: 'linear-gradient(90deg, #C0C0C0, #E0E0E0, #A8A8A8)',
-          WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent'
-        }}>
-          Maryland Living, Elevated.
+      {/* Background video for cinematic depth */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        poster="/images/hero-static.jpg"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          filter: "brightness(55%)",
+          zIndex: 0,
+        }}
+      >
+        <source src="/videos/hero.mp4" type="video/mp4" />
+      </video>
+
+      {/* Hero overlay content */}
+      <div
+        className="fade-in"
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "800px",
+          padding: "0 20px",
+        }}
+      >
+        <h1
+          className="text-silver"
+          style={{
+            fontSize: "3.2rem",
+            marginBottom: "18px",
+            lineHeight: "1.2",
+          }}
+        >
+          Maryland Living, Simplified.
         </h1>
-        <p style={{ color: '#BFBFBF', lineHeight: 1.6, marginBottom: 28 }}>
-          AI-powered tenant matching and a premium listing experience for Maryland’s landlords, agents, and residents.
+        <p style={{ color: "#BFBFBF", fontSize: "1.15rem", marginBottom: "36px" }}>
+          Discover, apply, and tour your next home with ease — powered by G & G’s
+          verified network and next-gen AI.
         </p>
-        <div style={{ display: 'flex', gap: 12, justifyContent: 'center' }}>
-          <a href="/subscriber-signup" style={ctaPrimary}>Join Now</a>
-          <a href="/tenant-signup" style={ctaGhost}>Browse Listings</a>
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            gap: "14px",
+            flexWrap: "wrap",
+          }}
+        >
+          <a href="/subscriber-signup" className="btn-silver">
+            Join Now
+          </a>
+          <a href="/tenant-signup" className="btn-outline">
+            Browse Listings
+          </a>
         </div>
       </div>
+
+      {/* Subtle silver shimmer overlay */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background:
+            "linear-gradient(120deg, rgba(192,192,192,0.05) 0%, rgba(255,255,255,0.08) 50%, rgba(192,192,192,0.05) 100%)",
+          backgroundSize: "400% 400%",
+          animation: "shimmer 10s infinite linear",
+          zIndex: 0,
+        }}
+      />
+
+      <style jsx>{`
+        @keyframes shimmer {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+      `}</style>
     </section>
   );
 }
-const ctaPrimary = {
-  background: 'linear-gradient(90deg, #C0C0C0, #E0E0E0, #A8A8A8)',
-  color: '#000', textDecoration: 'none', padding: '12px 22px',
-  borderRadius: 8, fontWeight: 700
-};
-const ctaGhost = {
-  border: '1px solid #C0C0C0', color: '#C0C0C0', textDecoration: 'none',
-  padding: '12px 22px', borderRadius: 8
-};
