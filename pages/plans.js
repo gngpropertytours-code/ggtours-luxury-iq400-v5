@@ -1,3 +1,4 @@
+<main id="plans" style={ ... }>
 export default function Plans() {
   const plans = [
     {
