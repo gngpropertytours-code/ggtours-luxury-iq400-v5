@@ -1,73 +1,77 @@
-<section id="howitworks" style={ ... }>
 export default function HowItWorks() {
   const steps = [
     {
-      title: "1. Explore Verified Listings",
-      description:
-        "Tenants can browse high-quality listings with cinematic tours, verified details, and transparent pricing — no signup required.",
+      title: "1. Explore",
+      desc: "Browse verified listings across Baltimore and Maryland in one sleek interface.",
     },
     {
-      title: "2. Apply & Get Matched",
-      description:
-        "Once ready, tenants submit a simple application. HAVEN AI securely evaluates fit and automatically notifies property owners.",
+      title: "2. Apply",
+      desc: "Submit applications securely with paystubs, credit info, or references.",
     },
     {
-      title: "3. Schedule Effortlessly",
-      description:
-        "SYNCRO AI handles every tour schedule — virtual or in-person — and confirms with both tenant and landlord in real-time.",
+      title: "3. Schedule",
+      desc: "Book tours instantly with SYNCRO AI handling confirmations and reminders.",
     },
     {
-      title: "4. Lease with Confidence",
-      description:
-        "Once the lease is signed, both parties stay connected through verified records, reminders, and secure communication.",
+      title: "4. Lease",
+      desc: "Landlords approve verified tenants and finalize via e-sign integration.",
     },
   ];
 
   return (
     <section
+      id="howitworks"
       style={{
-        backgroundColor: "#000",
-        color: "#fff",
-        fontFamily: "Inter, sans-serif",
-        padding: "4rem 2rem",
+        backgroundColor: "black",
+        color: "white",
+        padding: "100px 20px",
         textAlign: "center",
       }}
     >
-      <h1
+      <h2
         style={{
-          color: "#EAD27F",
-          fontSize: "2.5rem",
-          marginBottom: "2rem",
+          fontSize: "2rem",
+          fontWeight: "700",
+          background:
+            "linear-gradient(90deg, #C8A951, #D4AF37, #EAD27F)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          marginBottom: "50px",
         }}
       >
         How It Works
-      </h1>
-
+      </h2>
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "center",
-          gap: "2rem",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+          gap: "30px",
           maxWidth: "1000px",
           margin: "0 auto",
         }}
       >
-        {steps.map((s) => (
+        {steps.map((step, index) => (
           <div
-            key={s.title}
+            key={index}
             style={{
-              flex: "1 1 300px",
-              background: "linear-gradient(145deg,#111,#000)",
-              border: "1px solid #333",
-              borderRadius: "10px",
-              padding: "2rem",
-              boxShadow: "0 0 20px rgba(212,175,55,0.08)",
-              transition: "transform 0.3s ease",
+              border: "1px solid rgba(212,175,55,0.3)",
+              borderRadius: "6px",
+              padding: "30px",
+              backgroundColor: "#0d0d0d",
             }}
           >
-            <h3 style={{ color: "#D4AF37" }}>{s.title}</h3>
-            <p style={{ color: "#ccc", lineHeight: "1.6" }}>{s.description}</p>
+            <h3
+              style={{
+                color: "#EAD27F",
+                marginBottom: "10px",
+                fontWeight: "600",
+              }}
+            >
+              {step.title}
+            </h3>
+            <p style={{ color: "#d4d4d4", lineHeight: "1.6" }}>
+              {step.desc}
+            </p>
           </div>
         ))}
       </div>
