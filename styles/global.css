@@ -8,3 +8,7 @@ button:hover, a:hover {
   color: #EAD27F;
   transition: color 0.3s ease;
 }
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
