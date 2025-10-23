@@ -4,10 +4,8 @@ export default function Navbar() {
   const [hover, setHover] = useState(false);
 
   const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -15,44 +13,24 @@ export default function Navbar() {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: '1rem 2rem',
-        backgroundColor: '#000',
-        borderBottom: '2px solid transparent',
-        borderImage: 'linear-gradient(90deg, #C8A951, #D4AF37, #EAD27F) 1',
-        backgroundImage: hover
-          ? 'linear-gradient(90deg, rgba(200,169,81,0.1), rgba(234,210,127,0.15))'
-          : 'none',
-        transition: 'background-image 1s ease',
-        position: 'fixed',
-        width: '100%',
-        top: 0,
-        zIndex: 1000
+        position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center',
+        padding: '14px 24px', background: '#000',
+        borderBottom: '2px solid', borderImage: 'linear-gradient(90deg, #8F8F8F, #C0C0C0, #9E9E9E) 1',
+        backgroundImage: hover ? 'linear-gradient(90deg, rgba(160,160,160,0.12), rgba(224,224,224,0.12))' : 'none',
+        transition: 'background-image 0.8s ease'
       }}
     >
-      {/* Logo */}
-      <div style={{ color: '#EAD27F', fontWeight: 'bold', fontSize: '1.3rem' }}>
-        G & G Property Tours
-      </div>
-
-      {/* Navigation Links */}
-      <div style={{ display: 'flex', gap: '1.5rem' }}>
-        <a onClick={() => scrollToSection('hero')} style={linkStyle}>Home</a>
-        <a onClick={() => scrollToSection('howitworks')} style={linkStyle}>How It Works</a>
-        <a onClick={() => scrollToSection('plans')} style={linkStyle}>Plans</a>
-        <a href="/subscriber-signup" style={linkStyle}>Join</a>
-        <a href="/tenant-signup" style={linkStyle}>For Tenants</a>
+      <div style={{ fontWeight: 700, color: '#C0C0C0' }}>G & G Property Tours</div>
+      <div style={{ display: 'flex', gap: '1.2rem' }}>
+        <a style={link} onClick={() => scrollToSection('hero')}>Home</a>
+        <a style={link} onClick={() => scrollToSection('howitworks')}>How It Works</a>
+        <a style={link} onClick={() => scrollToSection('plans')}>Plans</a>
+        <a style={link} href="/subscriber-signup">Join</a>
+        <a style={link} href="/tenant-signup">For Tenants</a>
+        <a style={link} href="/testimonials">Testimonials</a>
       </div>
     </nav>
   );
 }
-
-const linkStyle = {
-  color: '#fff',
-  textDecoration: 'none',
-  fontWeight: '500',
-  transition: 'color 0.3s ease',
-  cursor: 'pointer'
-};
+const link = { color: '#fff', textDecoration: 'none', cursor: 'pointer' };
