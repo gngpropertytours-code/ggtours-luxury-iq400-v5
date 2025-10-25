@@ -5,9 +5,11 @@
 
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "npm run verify && npm run repair && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify": "node scripts/prebuild-check.js",
+    "repair": "node scripts/auto-repair.js"
   },
 
   "dependencies": {
