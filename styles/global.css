@@ -5,21 +5,24 @@ body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden; /* stops horizontal scroll bars on iPhone */
-}
-/* -----------------------------------------------------
-   🖤 G & G Property Tours – Luxury Font & Branding
-   ----------------------------------------------------- */
-
-/* Import luxury fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Merriweather:wght@700&display=swap');
-
-body {
+  -webkit-overflow-scrolling: touch;
   background-color: #000;
   color: #E0E0E0;
   font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 0;
+  scroll-behavior: smooth;
+  box-sizing: border-box;
 }
+
+/* Safe area for iPhones */
+body {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* -----------------------------------------------------
+   🖤 G & G Property Tours – Luxury Font & Branding
+   ----------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Merriweather:wght@700&display=swap');
 
 /* Serif headings for luxury look */
 h1, h2, h3, h4 {
@@ -27,6 +30,8 @@ h1, h2, h3, h4 {
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #E0E0E0;
+  margin: 0;
+  padding: 0;
 }
 
 /* Logo style */
@@ -37,11 +42,12 @@ h1, h2, h3, h4 {
   letter-spacing: 1.5px;
   color: #E0E0E0;
   text-transform: uppercase;
+  user-select: none;
 }
 
 /* Gradient silver text */
 .text-silver {
-  background: linear-gradient(90deg, #C0C0C0, #A9A9A9);
+  background: linear-gradient(90deg, #D9D9D9, #AFAFAF, #D9D9D9);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -50,7 +56,7 @@ h1, h2, h3, h4 {
 a {
   color: #C0C0C0;
   text-decoration: none;
-  transition: 0.3s ease;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 a:hover {
   color: #FFFFFF;
@@ -58,7 +64,11 @@ a:hover {
 }
 
 /* Consistent spacing */
-section { padding: 80px 20px; }
+section {
+  padding: clamp(60px, 10vh, 100px) 20px;
+  margin: 0 auto;
+  max-width: 1400px;
+}
 
 /* Silver divider line */
 hr {
@@ -77,7 +87,35 @@ hr {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 @keyframes shimmerMove {
   from { background-position: 0%; }
   to { background-position: 200%; }
+}
+
+/* Dropdown styling override (global) */
+nav {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 9999;
+}
+
+/* iPhone Fix for header cutoff */
+header {
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Smooth dropdown fade */
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
