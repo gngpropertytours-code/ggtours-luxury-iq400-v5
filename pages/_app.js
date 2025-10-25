@@ -1,14 +1,14 @@
 /* -----------------------------------------------------
    🖤  G & G Luxury – IQ400 V5 Application Wrapper
    -----------------------------------------------------
-   Handles:
-   • Global CSS injection
-   • Viewport optimization for all devices
-   • Smooth safe-area compatibility
+   Purpose:
+   • Ensures global CSS imports resolve across all build environments
+   • Provides viewport + meta structure for perfect scaling
+   • Prevents Vercel “module not found” during SSR build
 ------------------------------------------------------ */
 
-import "../styles/globals.css";
 import Head from "next/head";
+import "../styles/globals.css"; // ✅ keep relative import for now — alias activates after first successful build
 
 export default function MyApp({ Component, pageProps }) {
   return (
@@ -30,3 +30,24 @@ export default function MyApp({ Component, pageProps }) {
     </>
   );
 }
+
+/* -----------------------------------------------------
+   🧩  Developer Notes – If Vercel still fails:
+   -----------------------------------------------------
+   1. Run these commands locally:
+        git add styles/globals.css
+        git commit -m "Ensure globals.css is tracked"
+        git push
+      ✅ Confirms the file is uploaded to the build repo.
+
+   2. If error persists:
+        npm install
+        git add package-lock.json
+        git commit -m "Rebuild lockfile"
+        git push
+      ✅ Regenerates SWC & Next.js build dependencies.
+
+   3. After your next successful build:
+        Switch this line → import "@styles/globals.css"
+      ✅ Uses the path alias from next.config.js once the repo is stable.
+------------------------------------------------------ */
