@@ -137,3 +137,21 @@ nav {
   section { padding: 60px 16px; }
   .logo { font-size: 1.6rem; }
 }
+
+/* -----------------------------------------------------
+   8️⃣ Absolute Overflow & Viewport Fix
+   ----------------------------------------------------- */
+html, body {
+  overflow-x: hidden !important;
+  width: 100vw !important;
+}
+
+#root, main, header, section, footer {
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+}
+
+/* Safe spacing for fixed header */
+main {
+  padding-top: calc(90px + env(safe-area-inset-top));
+}
