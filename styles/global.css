@@ -1,4 +1,8 @@
-/* 🖤 G & G Luxury Base Styles – IQ400 Framework */
+/* -----------------------------------------------------
+   🖤  G & G Luxury – IQ400 V5 Global Stylesheet
+   ----------------------------------------------------- */
+
+/* 1️⃣ Core Resets & Device Safety */
 html,
 body {
   margin: 0;
@@ -6,19 +10,104 @@ body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
   background-color: #000;
   color: #E0E0E0;
-  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
   box-sizing: border-box;
 }
 
-/* Safe-area padding for iPhone Dynamic Island */
+/* Safe-area padding (Dynamic Island / bottom bars) */
 body {
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 }
 
+/* Border-box for all elements */
 *, *::before, *::after {
   box-sizing: inherit;
+}
+
+/* -----------------------------------------------------
+   2️⃣ Luxury Typography System
+   ----------------------------------------------------- */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap");
+
+:root {
+  --font-body: "Inter", sans-serif;
+  --font-title: "Playfair Display", serif;
+  --color-bg: #000;
+  --color-text: #E0E0E0;
+  --color-accent: #C1A875;
+  --transition: all 0.3s ease;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* -----------------------------------------------------
+   3️⃣ Universal Layout & Aesthetic Rhythm
+   ----------------------------------------------------- */
+
+/* Headings – cinematic tone */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-title);
+  letter-spacing: 0.5px;
+  color: var(--color-text);
+  text-transform: none;
+  margin: 0 0 0.5em 0;
+}
+
+/* Paragraphs – soft readability */
+p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  margin: 0 0 1.2em;
+  color: var(--color-text);
+}
+
+/* Links – gold accent hover */
+a {
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: var(--transition);
+}
+a:hover {
+  opacity: 0.8;
+}
+
+/* Buttons – minimal, elegant */
+button {
+  font-family: var(--font-body);
+  border: none;
+  background-color: var(--color-accent);
+  color: #000;
+  padding: 0.75em 1.5em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+button:hover {
+  opacity: 0.9;
+}
+
+/* -----------------------------------------------------
+   4️⃣ Motion & Scroll Enhancements
+   ----------------------------------------------------- */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  background: #111;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-accent);
+  border-radius: 10px;
 }
