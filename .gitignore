@@ -1,16 +1,39 @@
-# Node and build
+# -----------------------------------------------------
+# 🖤  G & G Luxury – IQ400 V5 Git Ignore Configuration
+# -----------------------------------------------------
+# Keeps repo clean, stable, and safe for production.
+# Allows critical folders like /styles, /components, and /lib
+# to always be deployed to Vercel.
+# -----------------------------------------------------
+
+# 🚫 Node / Build Outputs
 node_modules/
 .next/
 out/
+dist/
 .env*
+!.env.example     # Allow .env.example for reference
 
-# Logs
+# 🧩 OS & Editor Noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# 🪶 Logs & Temp
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+*.log
 
-# OS files
-.DS_Store
-
-# Ignore local testing or scratch files
+# 🔒 Local Config Files
 *.local
+*.cache
+*.swp
+
+# ✅ Allow Important App Folders
+!styles/
+!components/
+!lib/
+!public/
+!pages/
