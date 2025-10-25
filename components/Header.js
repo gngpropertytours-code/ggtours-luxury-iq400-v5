@@ -5,7 +5,9 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onResize = () => { if (window.innerWidth > 768) setMenuOpen(false); };
+    const onResize = () => {
+      if (window.innerWidth > 768) setMenuOpen(false);
+    };
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
@@ -35,7 +37,7 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Dropdown attached directly under the header */}
+      {/* Dropdown directly below header */}
       <div style={dropdownWrap(menuOpen)}>
         <nav style={dropdownNav}>
           {links.map((l) => (
@@ -67,13 +69,12 @@ const headerStyle = {
   backdropFilter: "blur(8px)",
   WebkitBackdropFilter: "blur(8px)",
   borderBottom: "1px solid rgba(192,192,192,0.25)",
-  // safe-area + responsive padding
   paddingTop: "calc(12px + env(safe-area-inset-top))",
   paddingBottom: 12,
-  paddingLeft: "clamp(16px, 4vw, 28px)",
-  paddingRight: "clamp(16px, 4vw, 28px)",
+  paddingLeft: "calc(16px + env(safe-area-inset-left))",
+  paddingRight: "calc(16px + env(safe-area-inset-right))",
   boxSizing: "border-box",
-  overflowX: "hidden",
+  overflow: "hidden", // fully removes right overflow
 };
 
 const bar = {
@@ -81,8 +82,9 @@ const bar = {
   alignItems: "center",
   justifyContent: "space-between",
   margin: "0 auto",
-  maxWidth: 1200,
+  maxWidth: "min(1200px, 100%)",
   width: "100%",
+  overflow: "hidden", // ensures children don't push out
 };
 
 const burgerBtn = {
@@ -110,7 +112,6 @@ function burgerLine(state) {
   return base;
 }
 
-// Dropdown: full-width, absolute below header so it won't be clipped
 const dropdownWrap = (open) => ({
   position: "absolute",
   top: "100%",
@@ -121,6 +122,7 @@ const dropdownWrap = (open) => ({
   background: "linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(70,70,70,0.55) 100%)",
   borderTop: "1px solid rgba(192,192,192,0.2)",
   animation: "fadeDown 0.35s ease",
+  overflowX: "hidden",
 });
 
 const dropdownNav = {
@@ -128,6 +130,7 @@ const dropdownNav = {
   gap: 8,
   padding: "14px 0",
   textAlign: "center",
+  overflow: "hidden",
 };
 
 const dropLink = {
