@@ -5,11 +5,9 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) setMenuOpen(false);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    const onResize = () => { if (window.innerWidth > 768) setMenuOpen(false); };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const links = [
@@ -22,10 +20,10 @@ export default function Header() {
 
   return (
     <header style={headerStyle}>
-      <div style={innerContainer}>
+      <div style={bar}>
         <Logo />
 
-        {/* Burger Icon */}
+        {/* Burger */}
         <button
           aria-label="Menu"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -37,28 +35,27 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Dropdown Menu */}
-      {menuOpen && (
-        <nav style={dropdownMenu}>
+      {/* Dropdown attached directly under the header */}
+      <div style={dropdownWrap(menuOpen)}>
+        <nav style={dropdownNav}>
           {links.map((l) => (
             <a
               key={l.name}
               href={l.href}
               onClick={() => setMenuOpen(false)}
-              style={linkStyle}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#C0C0C0")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#F5F5F5")}
+              style={dropLink}
             >
               {l.name}
             </a>
           ))}
         </nav>
-      )}
+      </div>
     </header>
   );
 }
 
-// Styles
+/* ---------------- Styles ---------------- */
+
 const headerStyle = {
   position: "fixed",
   top: 0,
@@ -66,21 +63,25 @@ const headerStyle = {
   right: 0,
   width: "100%",
   zIndex: 9999,
-  background: "rgba(0, 0, 0, 0.92)",
+  background: "rgba(0,0,0,0.92)",
   backdropFilter: "blur(8px)",
+  WebkitBackdropFilter: "blur(8px)",
   borderBottom: "1px solid rgba(192,192,192,0.25)",
-  padding: "calc(1rem + env(safe-area-inset-top)) 1rem 1rem",
+  // safe-area + responsive padding
+  paddingTop: "calc(12px + env(safe-area-inset-top))",
+  paddingBottom: 12,
+  paddingLeft: "clamp(16px, 4vw, 28px)",
+  paddingRight: "clamp(16px, 4vw, 28px)",
   boxSizing: "border-box",
+  overflowX: "hidden",
 };
 
-const innerContainer = {
+const bar = {
   display: "flex",
-  justifyContent: "space-between",
   alignItems: "center",
-  maxWidth: "1200px",
+  justifyContent: "space-between",
   margin: "0 auto",
-  padding: "0 1rem",
-  boxSizing: "border-box",
+  maxWidth: 1200,
   width: "100%",
 };
 
@@ -88,9 +89,9 @@ const burgerBtn = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  gap: "5px",
-  width: "32px",
-  height: "24px",
+  gap: 5,
+  width: 36,
+  height: 28,
   background: "transparent",
   border: "none",
   cursor: "pointer",
@@ -103,30 +104,35 @@ function burgerLine(state) {
     backgroundColor: "#D0D0D0",
     transition: "all 0.3s ease",
   };
-  if (state === "top")
-    return { ...base, transform: "rotate(45deg) translateY(8px)" };
+  if (state === "top") return { ...base, transform: "rotate(45deg) translateY(9px)" };
   if (state === "hide") return { ...base, opacity: 0 };
-  if (state === "bottom")
-    return { ...base, transform: "rotate(-45deg) translateY(-8px)" };
+  if (state === "bottom") return { ...base, transform: "rotate(-45deg) translateY(-9px)" };
   return base;
 }
 
-const dropdownMenu = {
+// Dropdown: full-width, absolute below header so it won't be clipped
+const dropdownWrap = (open) => ({
   position: "absolute",
   top: "100%",
   left: 0,
   right: 0,
-  background:
-    "linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(80,80,80,0.5) 100%)",
+  width: "100%",
+  display: open ? "block" : "none",
+  background: "linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(70,70,70,0.55) 100%)",
   borderTop: "1px solid rgba(192,192,192,0.2)",
+  animation: "fadeDown 0.35s ease",
+});
+
+const dropdownNav = {
+  display: "grid",
+  gap: 8,
+  padding: "14px 0",
   textAlign: "center",
-  padding: "1.2rem 0",
-  animation: "fadeDown 0.4s ease",
 };
 
-const linkStyle = {
+const dropLink = {
   display: "block",
-  padding: "0.8rem 0",
+  padding: "10px 0",
   color: "#F5F5F5",
   textDecoration: "none",
   fontFamily: "'Montserrat', sans-serif",
@@ -134,5 +140,5 @@ const linkStyle = {
   fontSize: "1rem",
   letterSpacing: "0.08em",
   textTransform: "uppercase",
-  transition: "color 0.3s ease",
+  transition: "color 0.25s ease",
 };
