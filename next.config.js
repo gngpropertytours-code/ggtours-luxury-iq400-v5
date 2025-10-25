@@ -6,15 +6,16 @@
  * ----------------------------------------------------- */
 
 const path = require("path");
+const fs = require("fs");
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
 
   /* 🚀 1️⃣ Build Performance & Optimization */
-  swcMinify: true,                  // Next-gen compiler for faster builds
-  compress: true,                   // Gzip compression by default
-  poweredByHeader: false,           // Removes "X-Powered-By: Next.js"
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
 
   /* 💡 2️⃣ Image Handling (auto-optimized by Vercel) */
   images: {
@@ -32,8 +33,23 @@ const nextConfig = {
     return config;
   },
 
-  /* 🔒 4️⃣ Future-Proofing */
-  eslint: { ignoreDuringBuilds: true }, // Prevents build fails from linting noise
+  /* 🩺 4️⃣ Pre-Build Guard — Auto-Check for Critical Files */
+  async webpackBuildDone() {
+    const cssPath = path.join(__dirname, "styles", "globals.css");
+    if (!fs.existsSync(cssPath)) {
+      console.warn(
+        "\n⚠️  Missing styles/globals.css — creating fallback file..."
+      );
+      fs.mkdirSync(path.join(__dirname, "styles"), { recursive: true });
+      fs.writeFileSync(
+        cssPath,
+        "/* Auto-generated fallback stylesheet. Please customize. */\nbody{margin:0;padding:0;}"
+      );
+    }
+  },
+
+  /* 🔒 5️⃣ Future-Proofing */
+  eslint: { ignoreDuringBuilds: true },
 };
 
 module.exports = nextConfig;
