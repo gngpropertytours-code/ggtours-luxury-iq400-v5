@@ -4,7 +4,6 @@ import Logo from "./Logo";
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Close menu when resized back to desktop
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth > 768) setMenuOpen(false);
@@ -28,13 +27,13 @@ export default function Header() {
         top: 0,
         left: 0,
         right: 0,
+        width: "100%",
         zIndex: 9999,
-        background: "rgba(0, 0, 0, 0.9)",
+        background: "rgba(0, 0, 0, 0.92)",
         backdropFilter: "blur(8px)",
         borderBottom: "1px solid rgba(192,192,192,0.25)",
-        padding: "1rem clamp(1rem, 4vw, 2.5rem)",
+        padding: "1rem 1.2rem",
         boxSizing: "border-box",
-        overflowX: "hidden",
       }}
     >
       <div
@@ -44,27 +43,13 @@ export default function Header() {
           alignItems: "center",
           maxWidth: "1200px",
           margin: "0 auto",
-          width: "100%",
+          paddingRight: "1rem",
+          paddingLeft: "1rem",
         }}
       >
         <Logo />
 
-        {/* Desktop Nav */}
-        <nav className="desktop-nav" style={{ display: "none", gap: "2rem" }}>
-          {links.map((l) => (
-            <a
-              key={l.name}
-              href={l.href}
-              style={linkStyle}
-              onMouseEnter={(e) => (e.currentTarget.style.color = "#CFCFCF")}
-              onMouseLeave={(e) => (e.currentTarget.style.color = "#F5F5F5")}
-            >
-              {l.name}
-            </a>
-          ))}
-        </nav>
-
-        {/* Burger */}
+        {/* Burger Icon */}
         <button
           aria-label="Menu"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -78,57 +63,50 @@ export default function Header() {
 
       {/* Dropdown Menu */}
       <nav
-        className="mobile-dropdown"
         style={{
-          maxHeight: menuOpen ? 260 : 0,
-          overflow: "hidden",
-          transition: "max-height 0.45s ease",
+          display: menuOpen ? "block" : "none",
           background:
-            "linear-gradient(180deg, rgba(0,0,0,0.96) 0%, rgba(60,60,60,0.55) 100%)",
-          borderTop: menuOpen ? "1px solid rgba(192,192,192,0.18)" : "none",
-          boxShadow: menuOpen ? "0 4px 26px rgba(255,255,255,0.05)" : "none",
+            "linear-gradient(180deg, rgba(0,0,0,0.95) 0%, rgba(80,80,80,0.5) 100%)",
+          borderTop: "1px solid rgba(192,192,192,0.2)",
+          textAlign: "center",
+          padding: "1.2rem 0",
+          animation: "fadeDown 0.4s ease",
         }}
       >
-        <ul
-          style={{
-            listStyle: "none",
-            margin: 0,
-            padding: menuOpen ? "1rem 0" : 0,
-            textAlign: "center",
-          }}
-        >
-          {links.map((l) => (
-            <li key={l.name} style={{ margin: "1rem 0" }}>
-              <a
-                href={l.href}
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  color: "#E5E5E5",
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 500,
-                  fontSize: "1rem",
-                  textDecoration: "none",
-                  letterSpacing: "0.08em",
-                  textTransform: "uppercase",
-                  transition: "color 0.3s ease",
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = "#D8D8D8")}
-                onMouseLeave={(e) => (e.currentTarget.style.color = "#E5E5E5")}
-              >
-                {l.name}
-              </a>
-            </li>
-          ))}
-        </ul>
+        {links.map((l) => (
+          <a
+            key={l.name}
+            href={l.href}
+            onClick={() => setMenuOpen(false)}
+            style={{
+              display: "block",
+              padding: "0.8rem 0",
+              color: "#f5f5f5",
+              textDecoration: "none",
+              fontFamily: "'Montserrat', sans-serif",
+              fontWeight: 500,
+              fontSize: "1rem",
+              letterSpacing: "0.08em",
+              textTransform: "uppercase",
+              transition: "color 0.3s ease",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = "#C0C0C0")}
+            onMouseLeave={(e) => (e.currentTarget.style.color = "#f5f5f5")}
+          >
+            {l.name}
+          </a>
+        ))}
       </nav>
 
       <style jsx>{`
-        @media (min-width: 769px) {
-          .desktop-nav {
-            display: flex !important;
+        @keyframes fadeDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
           }
-          .mobile-dropdown {
-            display: none !important;
+          to {
+            opacity: 1;
+            transform: translateY(0);
           }
         }
       `}</style>
@@ -136,24 +114,13 @@ export default function Header() {
   );
 }
 
-const linkStyle = {
-  color: "#F5F5F5",
-  textDecoration: "none",
-  fontFamily: "'Montserrat', sans-serif",
-  fontWeight: 500,
-  fontSize: "0.95rem",
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-  transition: "color 0.3s ease",
-};
-
 const burgerBtn = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  gap: 5,
-  width: 36,
-  height: 28,
+  gap: "5px",
+  width: "32px",
+  height: "24px",
   background: "transparent",
   border: "none",
   cursor: "pointer",
@@ -166,8 +133,8 @@ function burgerLine(state) {
     backgroundColor: "#CFCFCF",
     transition: "all 0.3s ease",
   };
-  if (state === "top") return { ...base, transform: "rotate(45deg) translateY(9px)" };
+  if (state === "top") return { ...base, transform: "rotate(45deg) translateY(8px)" };
   if (state === "hide") return { ...base, opacity: 0 };
-  if (state === "bottom") return { ...base, transform: "rotate(-45deg) translateY(-9px)" };
+  if (state === "bottom") return { ...base, transform: "rotate(-45deg) translateY(-8px)" };
   return base;
 }
